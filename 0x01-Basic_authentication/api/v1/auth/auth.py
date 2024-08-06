@@ -6,8 +6,10 @@ from flask import request
 from typing import List, TypeVar
 import fnmatch
 
+
 class Auth():
     """ Authentication Class"""
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ method to check if auth is required"""
         if path is None:
@@ -18,17 +20,13 @@ class Auth():
             if fnmatch.fnmatch(path, excluded_path):
                 return False
         return True
-    
+
     def authorization_header(self, request=None) -> str:
         """ method to get authorization header"""
         if request is not None:
             return request.headers.get('Authorization', None)
         return None
-    
+
     def current_user(self, request=None) -> TypeVar('User'):
         """Method to get user from request"""
         return None
-
-        
-
-
